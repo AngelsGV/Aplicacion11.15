@@ -4,9 +4,11 @@ import java.io.*;
 
 public class Metodos {
     public static void escribirNumeros() {
+        //Para ver si el ejercicio esta bien, tengo que crear el archivo numeros.dat y llenarlo
+        //Así podremos ver si las respuestas de pares e impares son OK
         try (ObjectOutputStream flujoSalida = new  ObjectOutputStream(new FileOutputStream("numeros.dat"))) {
             int[] numeros = {12, 5, 3, 8, 6, -9};
-            for (int t: numeros) {
+            for (int t: numeros) {//Se recorre el vector y se escriben el el doc 1 a 1 como tipo int
                 flujoSalida.writeInt(t);
             }
             System.out.println("Números escritos correctamente.");
