@@ -4,13 +4,14 @@ import java.io.*;
 
 public class Metodos {
     public static void escribirNumeros() {
-        try (FileOutputStream fos = new FileOutputStream("numeros.dat")) {
-
-            byte[] numeros = {10, 5, 3, 8, 6, 15};
-            fos.write(numeros);
+        try (ObjectOutputStream flujoSalida = new  ObjectOutputStream(new FileOutputStream("numeros.dat"))) {
+            int[] numeros = {10, 5, 3, 8, 6, 15};
+            for (int t: numeros) {
+                flujoSalida.writeInt(t);
+            }
             System.out.println("Números escritos correctamente.");
         } catch (IOException e) {
-            System.err.println(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
