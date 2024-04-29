@@ -20,8 +20,8 @@ public class Metodos {
     public static void separarNumeros() {
 
         try (ObjectInputStream flujoEntrada = new ObjectInputStream(new FileInputStream("numeros.dat"));
-             DataOutputStream pares = new DataOutputStream(new FileOutputStream("pares.dat"));
-             DataOutputStream impares = new DataOutputStream(new FileOutputStream("impares.dat"))) {
+             ObjectOutputStream pares = new ObjectOutputStream(new FileOutputStream("pares.dat"));
+            ObjectOutputStream impares = new ObjectOutputStream(new FileOutputStream("impares.dat"))) {
 
             int numero;
             while (true) {//Pongo true por poner algo. No sabia que condición poner
@@ -44,8 +44,8 @@ public class Metodos {
     }
 
     public static void mostrarFichero(String nombreFichero) {
-        try (DataInputStream fichero = new DataInputStream(new FileInputStream(nombreFichero))) {
-            //Al poner ObjectInputStream me daba la solución con un montón de 0.
+        try (ObjectInputStream fichero = new ObjectInputStream(new FileInputStream(nombreFichero))) {
+
             //He encontado esta solución después de ya marearme de input i output
             System.out.println("Contenido de " + nombreFichero + ":");
             int numero;
