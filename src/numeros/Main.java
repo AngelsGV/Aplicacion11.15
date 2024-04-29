@@ -13,6 +13,7 @@ public class Main {
         // Separar números en pares y impares
         separarNumeros();
 
-        mostrarFicheros();
+        mostrarFichero("pares.dat");
+        mostrarFichero("impares.dat");
     }
 }

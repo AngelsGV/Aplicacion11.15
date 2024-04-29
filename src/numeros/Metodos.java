@@ -5,50 +5,57 @@ import java.io.*;
 public class Metodos {
     public static void escribirNumeros() {
         try (ObjectOutputStream flujoSalida = new  ObjectOutputStream(new FileOutputStream("numeros.dat"))) {
-            int[] numeros = {10, 5, 3, 8, 6, 15};
+            int[] numeros = {12, 5, 3, 8, 6, -9};
             for (int t: numeros) {
                 flujoSalida.writeInt(t);
             }
             System.out.println("Números escritos correctamente.");
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 
     public static void separarNumeros() {
-        try (FileInputStream fis = new FileInputStream("numeros.dat");
-             FileOutputStream paresFos = new FileOutputStream("pares.dat");
-             FileOutputStream imparesFos = new FileOutputStream("impares.dat")) {
 
-            int byteLeido;
-            while ((byteLeido = fis.read()) != -1) {
-                if (byteLeido % 2 == 0) {
-                    paresFos.write(byteLeido);
-                } else {
-                    imparesFos.write(byteLeido);
+        try (ObjectInputStream flujoEntrada = new ObjectInputStream(new FileInputStream("numeros.dat"));
+             DataOutputStream pares = new DataOutputStream(new FileOutputStream("pares.dat"));
+             DataOutputStream impares = new DataOutputStream(new FileOutputStream("impares.dat"))) {
+
+            int numero;
+            while (true) {//Pongo true por poner algo. No sabia que condición poner
+                try {
+                    numero = flujoEntrada.readInt();
+                    if (numero % 2 == 0) { //Si es multiplo de 2. Par.
+                        pares.writeInt(numero);
+                    } else {
+                        impares.writeInt(numero);//Si queda resto al dividir entre 2. Impar.
+                    }
+                } catch (Exception ex) {
+                    break; // Salir del bucle cuando se llega al final del archivo
                 }
             }
 
             System.out.println("Números separados correctamente.");
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
         }
-    }
-
-    public static void mostrarFicheros() {
-        mostrarFichero("pares.dat");
-        mostrarFichero("impares.dat");
     }
 
     public static void mostrarFichero(String nombreFichero) {
-        try (FileInputStream fis = new FileInputStream(nombreFichero)) {
+        try (DataInputStream fichero = new DataInputStream(new FileInputStream(nombreFichero))) {
+            //Al poner ObjectInputStream me daba la solución con un montón de 0.
+            //He encontado esta solución después de ya marearme de input i output
             System.out.println("Contenido de " + nombreFichero + ":");
-            int byteLeido;
-            while ((byteLeido = fis.read()) != -1) {
-                System.out.println(byteLeido);
+            int numero;
+            while (fichero.available() > 0) {
+                numero = fichero.readInt();
+                System.out.println(numero);
             }
-        } catch (IOException e) {
-            System.err.println("Error al leer el archivo " + nombreFichero + ": " + e.getMessage());
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 }
+//---------------------------------------------
+//PROBLEMAS:
+//En la solución del programa me da la respuenta con un monton de 0
