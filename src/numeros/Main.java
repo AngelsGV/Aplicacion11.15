@@ -8,7 +8,7 @@ import static numeros.Metodos.*;
 public class Main {
     public static void main(String[] args) {
 
-        llenarArchivo();
+       llenarArchivo();
         separarNumeros();
         mostrarFicheros();
 
