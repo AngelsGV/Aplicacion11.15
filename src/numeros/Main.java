@@ -7,8 +7,7 @@ import static numeros.Metodos.*;
 // ficheros pares.dat e impares.dat para comprobar que se han guardado correctamente.
 public class Main {
     public static void main(String[] args) {
-
-       llenarArchivo();
+        escribirNumeros();
         separarNumeros();
         mostrarFicheros();
 
