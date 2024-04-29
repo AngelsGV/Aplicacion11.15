@@ -7,10 +7,12 @@ import static numeros.Metodos.*;
 // ficheros pares.dat e impares.dat para comprobar que se han guardado correctamente.
 public class Main {
     public static void main(String[] args) {
+
+        // Crear y escribir números
         escribirNumeros();
+        // Separar números en pares y impares
         separarNumeros();
+
         mostrarFicheros();
-
-
-        }
     }
+}
